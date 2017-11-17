@@ -23,7 +23,7 @@ public class Action : MonoBehaviour {
             Obstacle obstacle = collider.gameObject.GetComponent<Obstacle>();
             if (obstacle)
             {
-                if (obstacle.Activate(ActionType.Cut)) Destroy(this);
+                //if (obstacle.Activate(ActionType.Cut)) Destroy(this);
             }
         }
     }

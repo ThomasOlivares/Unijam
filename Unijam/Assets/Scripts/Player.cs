@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    private List<Action> actions;
+    private Action[] actions;
+    int activeActionIndex;
+
 
     // Use this for initialization
     void Start () {
-        actions = GetComponents<Action>();
+        actions = GetComponentsInChildren<Action>();
+        activeActionIndex = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    void ChangeActive()
+    {
+        if (activeActionIndex<actions.size)
+    }
 }
