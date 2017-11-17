@@ -14,19 +14,17 @@ public class Action : MonoBehaviour {
     };
 
     [SerializeField] protected float actionRadius;
-    private ActionType type;
+    public ActionType type;
 
-    void Activate()
+    void Activate(Vector3 positionPlayer)
     {
-
+        foreach (Collider collider in Physics.OverlapSphere(positionPlayer, actionRadius))
+        {
+            Obstacle obstacle = collider.gameObject.GetComponent<Obstacle>();
+            if (obstacle)
+            {
+                if (obstacle.Activate(ActionType.Cut)) Destroy(this);
+            }
+        }
     }
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
