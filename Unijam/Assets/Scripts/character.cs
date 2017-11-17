@@ -198,11 +198,11 @@ public class character : MonoBehaviour {
         float minY = Mathf.Max(val7, val8, val9) + height + MinXDistWithObjects;
 
         float valMin = val7;
-        if(valMin-minY > valMin - val8)
+        if(Mathf.Abs(valMin-minY) >Mathf.Abs(valMin - val8))
         {
             valMin = val8;
         }
-        if(valMin - minY > valMin - val9)
+        if(Mathf.Abs(valMin - minY) >Mathf.Abs( valMin - val9))
         {
             valMin = val9;
         }
