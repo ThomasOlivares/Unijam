@@ -1,18 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: bc05386b47d508e4b9b7045042d40691
-timeCreated: 1510956327
-licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
-  externalObjects: {}
-=======
-guid: a2b7f1215261b8c4497d23941ff885a6
-timeCreated: 1510956588
-licenseType: Free
-TextureImporter:
-  fileIDToRecycleName: {}
->>>>>>> 6bd302165cd99aac95f532b9dd3d785cd20bf3d8
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -21,8 +10,6 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapsPreserveCoverage: 0
-    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -38,13 +25,10 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    serializedVersion: 2
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -66,10 +50,22 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-<<<<<<< HEAD
-    resizeAlgorithm: 0
-=======
->>>>>>> 6bd302165cd99aac95f532b9dd3d785cd20bf3d8
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Windows Store Apps
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -80,7 +76,6 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
