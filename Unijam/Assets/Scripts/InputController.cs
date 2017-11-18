@@ -33,7 +33,7 @@ public class InputController : MonoBehaviour {
         private bool jumpThisFrame;
         public void checkSiLaToucheEstRelachee()
         {
-            if (Input.GetAxis("Jump Cross") <= 0) ready = true;
+            if (Input.GetAxis("Jump") <= 0) ready = true;
             else
             {
                 if (ready == true)
@@ -59,9 +59,9 @@ public class InputController : MonoBehaviour {
     void inputMoveJoystick()
     {
         crossJump.checkSiLaToucheEstRelachee();
-        float h = Input.GetAxis("Horizontal Keyboard arrows") + Input.GetAxis("Horizontal Keyboard zqsd");
+        float h =Input.GetAxis("Move");
         //float v = Input.GetAxis("Vertical");
-        if (Input.GetButtonDown("Jump arrows") || Input.GetButtonDown("Jump zqsd"))
+        if (Input.GetButtonDown("Jump"))
         {
             
             this.GetComponent<Character>().jump();

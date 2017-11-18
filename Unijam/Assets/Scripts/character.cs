@@ -383,7 +383,7 @@ public class Character : MonoBehaviour {
         gravity();
         updateHorizontalSpeed();
         if (Input.GetButtonDown("Switch")) ChangeActive();
-        if (Input.GetButtonDown("Launch")) TriggerActive();
+        if (Input.GetButtonDown("Fire")) TriggerActive();
         //print(landed);
     }
 }
