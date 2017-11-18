@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InputController : MonoBehaviour {
-
+    private Animator animator;
 
     public float horizontalSpeed, horizontalSpeedInAir;
 
@@ -63,7 +63,7 @@ public class InputController : MonoBehaviour {
         //float v = Input.GetAxis("Vertical");
         if (Input.GetButtonDown("Jump"))
         {
-            
+            this.gameObject.GetComponent<Character>().isMoving = true;
             this.GetComponent<Character>().jump();
         }
 
@@ -82,7 +82,7 @@ public class InputController : MonoBehaviour {
         if (h != 0)
         {
             //print("input");
-            
+            this.gameObject.GetComponent<Character>().isMoving = true;
             // check if the cube is in air
             if (!this.gameObject.GetComponent<Character>().getLanded()) currentSpeed = horizontalSpeedInAir;
             else currentSpeed = horizontalSpeed;
@@ -102,17 +102,27 @@ public class InputController : MonoBehaviour {
        
     }
 
+    void Flip(float horizontal) {
+        bool flipGameObject = ((transform.localScale.x < 0.0f  )? (horizontal > 0.01f) : (horizontal < 0.0f));
+        if (flipGameObject) {
+            Vector3 newScale = transform.localScale;
+            newScale.x *= -1;
+            transform.localScale = newScale;
+        }
+    }
+
     // Use this for initialization
     void Start () {
         currentSpeed = horizontalSpeed;
-
+        animator = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        this.gameObject.GetComponent<Renderer>().material.color = Color.white;
         //inputColor();
         inputMoveJoystick();
-	}
+        var horizontal = Input.GetAxis("Move");
+        Flip(horizontal);
+        animator.setBool("isMoving", isMoving);
+    }
 }
-
