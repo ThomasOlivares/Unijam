@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class character : MonoBehaviour {
+public class Character : MonoBehaviour {
 
 
-    
+    private Action[] actions;
+    public int activeActionIndex;
     public float g;
     public float jumpPower, doubleJumpPower, wallJumpPower;
     public float anticipateJump,anticipateWallJump, anticipateFall;
@@ -211,7 +212,7 @@ public class character : MonoBehaviour {
         if (this.gameObject.transform.position.y - minY <= anticipateJump)
         {
             GameObject platf = null;
-            PlateformeMouvante pltfmvt = null;
+            MovingPlateforme pltfmvt = null;
             landed = true;
             horizontalSpeed = 0;
             if (val7 == valMin)
@@ -229,7 +230,7 @@ public class character : MonoBehaviour {
 
             if (platf)
             {
-                pltfmvt = platf.GetComponent<PlateformeMouvante>();
+                pltfmvt = platf.GetComponent<MovingPlateforme>();
             }
             if (pltfmvt)
             {
@@ -356,12 +357,30 @@ public class character : MonoBehaviour {
         VerticalSpeed = 0;
         jumpcount = 2;
         horizontalSpeed = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        actions = GetComponentsInChildren<Action>();
+        activeActionIndex = 0;
+    }
+
+    void TriggerActive()
+    {
+        actions[activeActionIndex].Activate(transform.position);
+    }
+
+    void ChangeActive()
+    {
+        if (activeActionIndex < actions.Length - 1)
+        {
+            activeActionIndex += 1;
+        }
+        else activeActionIndex = 0;
+    }
+
+    // Update is called once per frame
+    void Update () {
         gravity();
         updateHorizontalSpeed();
+        if (Input.GetButtonDown("Switch")) ChangeActive();
+        if (Input.GetButtonDown("Launch")) TriggerActive();
         //print(landed);
-	}
+    }
 }

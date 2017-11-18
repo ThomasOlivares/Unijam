@@ -11,6 +11,6 @@ public class Water : Obstacle
 
     public override bool Activate(Action.ActionType actionType)
     {
-
+        return true;
     }
 }
