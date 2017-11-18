@@ -12,6 +12,9 @@ public class Character : MonoBehaviour {
     public float anticipateJump,anticipateWallJump, anticipateFall;
     
     public float  MinXDistWithObjects, MinYDistWithObjects;
+
+    public int nbActions;
+    GameObject[] Fireflies;
     
     // PUBLIC //
 
