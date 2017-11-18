@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class Rop : Obstacle
 {
-    void Start()
+    public new void Start()
     {
+        GetComponentInParent<Obstacle>().Start();
         type = Obstacle.ObstacleType.Rop;
     }
 
-    Sprite cuttedSprite;
+    // Animation
+    public AnimationClip onCut;
 
     public override bool Activate(Action.ActionType actionType)
     {
-        if (actionType == Action.ActionType.Cut || actionType == Action.ActionType.Shoot)
+        if (state == State.Default)
         {
-            ChangeSprite(cuttedSprite);
-            return true;
+            if (actionType == Action.ActionType.Cut || actionType == Action.ActionType.Shoot)
+            {
+                state = State.Cutted;
+                ChargeAnimation(onCut);
+                return true;
+            }
         }
         return false;
     }
