@@ -18,19 +18,35 @@ public abstract class Obstacle : MonoBehaviour {
     {
         Default,
         Frozen,
-        Dead,
+        Cutted, 
+        Destroyed,
         StateCount
     }
 
-    public ObstacleType type;
+    protected State state = State.Default;
 
-    public Sprite intactSprite;  // first sprite, when the player didn't interact with the object yet
+    [System.NonSerialized] public ObstacleType type;
+
+    public void Start()
+    {
+    }
 
     public abstract bool Activate(Action.ActionType actionType);
-
-    protected void ChangeSprite(Sprite sprite)
+    
+    protected void ChargeAnimation(AnimationClip animation)
     {
-        SpriteRenderer rd = GetComponent<SpriteRenderer>();
-        rd.sprite = sprite;
+        Animator animatorHandler = GetComponent<Animator>();
+        animatorHandler.SetBool("onActivate", true);
+        /*
+        Animation animationHandler = GetComponent<Animation>();
+        animationHandler.AddClip(animation, animation.name);
+        animationHandler.Play();
+        */
+    }
+
+    protected void DestroyCollider()
+    {
+        Collider2D collider = GetComponent<Collider2D>();
+        collider.enabled = false;
     }
 }

@@ -4,24 +4,38 @@ using UnityEngine;
 
 public class Tree : Obstacle
 {
-    void Start()
+    public new void Start()
     {
+        GetComponentInParent<Obstacle>().Start();
         type = Obstacle.ObstacleType.Tree;
     }
 
-    Sprite cuttedSprite;
-    Sprite destroyedSprite;
+    public void Update()
+    {
+        Collider2D collider = GetComponent<Collider2D>();
+        collider = new Collider2D();
+    }
+
+    // Animations
+    public AnimationClip onCut;
+    public AnimationClip onDestroyed;
 
     public override bool Activate(Action.ActionType actionType)
     {
-        switch (actionType)
+        if (state == State.Default)
         {
-            case Action.ActionType.Cut:
-                ChangeSprite(cuttedSprite);
-                return true;
-            case Action.ActionType.Destroy:
-                ChangeSprite(destroyedSprite);
-                return true;
+            switch (actionType)
+            {
+                case Action.ActionType.Cut:
+                    state = State.Cutted;
+                    ChargeAnimation(onCut);
+                    return true;
+                case Action.ActionType.Destroy:
+                    state = State.Destroyed;
+                    ChargeAnimation(onDestroyed);
+                    DestroyCollider();
+                    return true;
+            }
         }
         return false;
     }

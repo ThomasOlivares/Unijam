@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Monster : Obstacle
 {
-    private State state = State.Default;
 
-    void Start()
+    public new void Start()
     {
+        GetComponentInParent<Obstacle>().Start();
         type = Obstacle.ObstacleType.Monster;
     }
 
-    public Sprite deadSprite;
-    public Sprite frozenSprite;
+    // Animations
+    public AnimationClip onFroze;
+    public AnimationClip onKill;
 
     public override bool Activate(Action.ActionType actionType)
     {
@@ -21,19 +22,20 @@ public class Monster : Obstacle
             switch (actionType)
             {
                 case Action.ActionType.Destroy:
-                    state = State.Dead;
-                    ChangeSprite(deadSprite);
+                    state = State.Destroyed;
+                    ChargeAnimation(onKill);
                     return true;
                 case Action.ActionType.Freeze:
                     state = State.Frozen;
-                    ChangeSprite(frozenSprite);
+                    ChargeAnimation(onFroze);
+                    ChargeAnimation(onFroze);
                     return true;
             }       
         }
         else if (state == State.Frozen && actionType == Action.ActionType.Destroy)
         {
-            state = State.Dead;
-            ChangeSprite(deadSprite);
+            state = State.Destroyed;
+            ChargeAnimation(onKill);
             return true;
         }
         return false;

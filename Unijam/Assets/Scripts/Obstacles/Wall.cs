@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class Wall : Obstacle
 {
-    void Start()
+    public new void Start()
     {
+        GetComponentInParent<Obstacle>().Start();
         type = Obstacle.ObstacleType.Wall;
     }
 
-    public Sprite destroyedSprite;
+    // Animation
+    public AnimationClip onDestroyed;
 
     public override bool Activate(Action.ActionType actionType)
     {
-        switch (actionType)
+        if (state == State.Default)
         {
-            case Action.ActionType.Destroy:
-                ChangeSprite(destroyedSprite);
-                return true;
-            case Action.ActionType.Move:
-                // The wall is not impacted by the player movement
-                return true;
+            switch (actionType)
+            {
+                case Action.ActionType.Destroy:
+                    state = State.Destroyed;
+                    ChargeAnimation(onDestroyed);
+                    DestroyCollider();
+                    return true;
+                case Action.ActionType.Move:
+                    // The wall is not impacted by the player movement
+                    return true;
+            }
         }
         return false;
     }
