@@ -7,9 +7,10 @@ public class LucioleAnimation : MonoBehaviour {
     Transform playerTransform;
     bool isPlayerMoving;
 
-    float offsetX;
+    [SerializeField]
+    float offsetY = 0;
 
-    Vector3 m_centerPosition;
+    float m_centerPositionY;
     float m_degrees;
 
     float m_speed;
@@ -28,11 +29,6 @@ public class LucioleAnimation : MonoBehaviour {
     [SerializeField]
     float m_period = 1.0f;
 
-    void Start()
-    {
-        offsetX = transform.position.x - transform.parent.position.x;
-    }
-
     void Update()
     {
 
@@ -48,12 +44,9 @@ public class LucioleAnimation : MonoBehaviour {
             m_amplitude = m_amplitude_idle;
             m_speed = m_speed_idle;
         }
-        m_centerPosition = playerTransform.position;
+        m_centerPositionY = playerTransform.position.y + offsetY;
 
         float deltaTime = Time.deltaTime;
-
-        // Move center along x axis
-        m_centerPosition.x += deltaTime * m_speed + offsetX;
 
         // Update degrees
         float degreesPerSecond = 360.0f / m_period;
@@ -62,6 +55,6 @@ public class LucioleAnimation : MonoBehaviour {
 
         // Offset by sin wave
         Vector3 offset = new Vector3(0.0f, m_amplitude * Mathf.Sin(radians), 0.0f);
-        transform.position = m_centerPosition + offset;
+        transform.position = new Vector3(transform.position.x,m_centerPositionY,0.0f) + offset;
     }
 }
