@@ -16,14 +16,14 @@ public class Action : MonoBehaviour {
     [SerializeField] protected float actionRadius;
     public ActionType type;
 
-    void Activate(Vector3 positionPlayer)
+    public void Activate(Vector3 positionPlayer)
     {
         foreach (Collider collider in Physics.OverlapSphere(positionPlayer, actionRadius))
         {
             Obstacle obstacle = collider.gameObject.GetComponent<Obstacle>();
             if (obstacle)
             {
-                //if (obstacle.Activate(ActionType.Cut)) Destroy(this);
+                if (obstacle.Activate(ActionType.Cut)) Destroy(this);
             }
         }
     }
